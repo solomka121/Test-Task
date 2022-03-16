@@ -19,7 +19,7 @@ public class CubeThrower : MonoBehaviour
 
     private IEnumerator SpawnNewCube()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.25f);
             _cube = Instantiate(_prefab, transform);
     }
 } 
