@@ -1,11 +1,25 @@
 using UnityEngine;
+using System.Collections;
 
 public class CubeThrower : MonoBehaviour
 {
-    [SerializeField] private Transform _cube;
+    [SerializeField] private Cube _prefab;
+    [SerializeField] private Cube _cube;
+    [SerializeField] private float _throwStrenght;
 
    public void Throw()
     {
-        _cube.transform.Translate(Vector3.forward);
+        if (_cube == null)
+            return;
+        _cube.Launch(_throwStrenght);
+        _cube.transform.parent = null;
+        _cube = null;
+        StartCoroutine(SpawnNewCube());
+    }
+
+    private IEnumerator SpawnNewCube()
+    {
+        yield return new WaitForSeconds(0.1f);
+            _cube = Instantiate(_prefab, transform);
     }
 } 
