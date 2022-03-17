@@ -10,7 +10,6 @@ public class Cube : MonoBehaviour
     [SerializeField] private float _combineDelay;
     [SerializeField] private AnimationCurve _combineSizeCurve;
     private Rigidbody _rigidbody;
-    private MeshRenderer _meshRenderer;
     private TrailRenderer _trail;
     private CubesPool _pool;
 
@@ -21,7 +20,6 @@ public class Cube : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<TrailRenderer>();
-        _meshRenderer = GetComponent<MeshRenderer>();
         _value = _defaultvalue;
     }
 
@@ -47,6 +45,7 @@ public class Cube : MonoBehaviour
         {
             _value += cubeValue;
             OnValueChange?.Invoke(_value);
+            OnCombine?.Invoke(_value);
             LeanTween.scale(gameObject, Vector3.zero, 0.6f).setEase(_combineSizeCurve);
             StartCoroutine(CombineDelay());
             CombineThrow();
