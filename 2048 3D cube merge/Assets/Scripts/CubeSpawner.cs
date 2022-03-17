@@ -9,6 +9,7 @@ public class CubeSpawner : MonoBehaviour // to do events
     private Camera _mainCamera;
     float xThrowerMove;
     private float _cameraZPlane;
+    
 
     private void Awake()
     {
