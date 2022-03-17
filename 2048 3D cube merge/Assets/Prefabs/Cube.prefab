@@ -641,7 +641,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3260191024438266873}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 16dbda5bd56bb8d43b571f85268db64d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -859,15 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cube: {fileID: 3260191024438266871}
-  _colors:
-  - {r: 0.6039216, g: 0.20392154, b: 0.20392154, a: 0}
-  - {r: 0.6039216, g: 0.3751329, b: 0.20392154, a: 0}
-  - {r: 0.6039216, g: 0.5502069, b: 0.20392154, a: 0}
-  - {r: 0.4820522, g: 0.6039216, b: 0.20392154, a: 0}
-  - {r: 0.30928993, g: 0.6039216, b: 0.20392154, a: 0}
-  - {r: 0.20392154, g: 0.6039216, b: 0.42770544, a: 0}
-  - {r: 0.20392154, g: 0.6039216, b: 0.6039216, a: 0}
-  - {r: 0.20392154, g: 0.39320493, b: 0.6039216, a: 0}
+  _cubesColors: {fileID: 11400000, guid: 929f6c7ff8bf5984d896a2ea55684a60, type: 2}
 --- !u!1 &3260191024905164672
 GameObject:
   m_ObjectHideFlags: 0

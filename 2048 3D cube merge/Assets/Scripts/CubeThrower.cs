@@ -7,7 +7,6 @@ public class CubeThrower : MonoBehaviour
     [SerializeField] private float _slideSpeed;
     [SerializeField] private Transform _ScopeLine;
     private LTDescr scaling;
-    private Camera _mainCamera;
     private float _xPosition;
     private Cube _cube;
     private Transform _transform;
@@ -16,7 +15,6 @@ public class CubeThrower : MonoBehaviour
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
         _transform = transform;
     }
 
@@ -54,6 +52,9 @@ public class CubeThrower : MonoBehaviour
 
     public void SetCube(Cube cube)
     {
+        if (_cube != null)
+            _cube.Diactivate();
+
         _cube = cube;
         _cube.transform.parent = transform;
         cube.transform.localPosition = Vector3.zero;
