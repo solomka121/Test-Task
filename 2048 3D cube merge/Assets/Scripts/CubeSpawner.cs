@@ -29,6 +29,9 @@ public class CubeSpawner : MonoBehaviour
 
     private void SpawnCube()
     {
-        _cubeThrower.SetCube(_cubesPool.GetCube());
+        Cube cube = _cubesPool.GetCube();
+        cube.transform.localScale = Vector3.zero;
+        LeanTween.scale(cube.gameObject, Vector3.one, 0.3f).setEaseOutExpo();
+        _cubeThrower.SetCube(cube); 
     }
 }
