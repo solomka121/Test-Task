@@ -22,6 +22,7 @@ public class Cube : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<TrailRenderer>();
         _meshRenderer = GetComponent<MeshRenderer>();
+        _value = _defaultvalue;
     }
 
     public void SetPool(CubesPool pool) => _pool = pool;
@@ -39,6 +40,9 @@ public class Cube : MonoBehaviour
 
     public bool Combine(int cubeValue)
     {
+        if (_isFlying)
+            return false;
+
         if (_canCombine && _value == cubeValue)
         {
             _value += cubeValue;
