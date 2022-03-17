@@ -782,7 +782,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: 2
-  _combineDelay: 0.5
+  _combineDelay: 0.6
+  _combineSizeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.12636305
+      outSlope: 0.12636305
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.8127572
+    - serializedVersion: 3
+      time: 0.09999183
+      value: 0.49777374
+      inSlope: 0.013891984
+      outSlope: 0.013891984
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.28529635
+      value: 0.16489245
+      inSlope: -0.58159083
+      outSlope: -0.58159083
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13692962
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8231724855516548848
 MonoBehaviour:
   m_ObjectHideFlags: 0

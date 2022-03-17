@@ -7,6 +7,7 @@ public class Cube : MonoBehaviour
     private bool _isFlying;
     private bool _canCombine = true;
     [SerializeField] private float _combineDelay;
+    [SerializeField] private AnimationCurve _combineSizeCurve;
     private Rigidbody _rigidbody;
     private TrailRenderer _trail;
 
@@ -35,6 +36,7 @@ public class Cube : MonoBehaviour
         {
             _value += cubeValue;
             OnValueChange?.Invoke(_value);
+            LeanTween.scale(gameObject, Vector3.zero, 0.6f).setEase(_combineSizeCurve);
             StartCoroutine(CombineDelay());
             CombineThrow();
             return true;
@@ -51,7 +53,7 @@ public class Cube : MonoBehaviour
 
     private void CombineThrow()
     {
-        //_rigidbody.velocity = Vector3.zero;
+        _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * 5f , ForceMode.Impulse);
     }
 
