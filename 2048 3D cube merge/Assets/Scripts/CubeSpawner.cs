@@ -1,50 +1,34 @@
 using UnityEngine;
-using UnityEngine.EventSystems; // to do with events 
+using System.Collections;
 
-public class CubeSpawner : MonoBehaviour // to do events
+public class CubeSpawner : MonoBehaviour
 {
-    [SerializeField] private float _xBound;
+    [SerializeField] private CubesPool _cubesPool;
     [SerializeField] private CubeThrower _cubeThrower;
-    [SerializeField] private float _slideSpeed;
-    private Camera _mainCamera;
-    float xThrowerMove;
-    private float _cameraZPlane;
-    
+    [SerializeField] private float _spawnSpeed;
+    private Coroutine _spawnTimer;
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
-        _cameraZPlane = _mainCamera.transform.position.z - transform.position.z;
+        _cubeThrower.OnThrow += StartSpawnCountdown;
+        StartSpawnCountdown();
     }
 
-    private void Start()
+    private void StartSpawnCountdown()
     {
-        xThrowerMove = _cubeThrower.transform.position.x;
+        if (_spawnTimer == null)
+            _spawnTimer = StartCoroutine(SpawnCountdown());
     }
 
-    void Update()
+    private IEnumerator SpawnCountdown()
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if(touch.phase == TouchPhase.Moved)
-            {
-                xThrowerMove += touch.deltaPosition.x * Time.deltaTime * _slideSpeed;
-                xThrowerMove = Mathf.Clamp(xThrowerMove, -_xBound, _xBound);
-                print("After : " + xThrowerMove);
-                _cubeThrower.transform.position = new Vector3(xThrowerMove, _cubeThrower.transform.position.y, _cubeThrower.transform.position.z);
-            } 
-
-            if (touch.phase == TouchPhase.Ended) 
-            {
-                Throw();
-            }
-        }
+        yield return new WaitForSeconds(_spawnSpeed);
+        SpawnCube();
+        _spawnTimer = null;
     }
 
-    private void Throw()
+    private void SpawnCube()
     {
-        _cubeThrower.Throw();
+        _cubeThrower.SetCube(_cubesPool.GetCube());
     }
 }

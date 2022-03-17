@@ -1,25 +1,58 @@
 using UnityEngine;
-using System.Collections;
 
 public class CubeThrower : MonoBehaviour
 {
-    [SerializeField] private Cube _prefab;
-    [SerializeField] private Cube _cube;
+    [SerializeField] private float _xBound;
     [SerializeField] private float _throwStrenght;
+    [SerializeField] private float _slideSpeed;
+    private Camera _mainCamera;
+    private float _xPosition;
+    private Cube _cube;
+    private Transform _transform;
 
-   public void Throw()
+    public event System.Action OnThrow;
+
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+        _transform = transform;
+    }
+
+
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                _xPosition += touch.deltaPosition.x * Time.deltaTime * _slideSpeed;
+                _xPosition = Mathf.Clamp(_xPosition, -_xBound, _xBound);
+                _transform.position = new Vector3(_xPosition, _transform.position.y, _transform.position.z);
+            }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                Throw();
+            }
+        }
+    }
+
+    public void Throw()
     {
         if (_cube == null)
             return;
-        _cube.Launch(_throwStrenght);
+        OnThrow?.Invoke();
         _cube.transform.parent = null;
+        _cube.Launch(_throwStrenght);
         _cube = null;
-        StartCoroutine(SpawnNewCube());
     }
 
-    private IEnumerator SpawnNewCube()
+    public void SetCube(Cube cube)
     {
-        yield return new WaitForSeconds(0.25f);
-            _cube = Instantiate(_prefab, transform);
+        _cube = cube;
+        _cube.transform.parent = transform;
+        cube.transform.localPosition = Vector3.zero;
     }
 } 
