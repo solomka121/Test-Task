@@ -128,9 +128,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -298,9 +298,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -504,9 +504,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 3260191024438266870}
   - component: {fileID: 3260191024438266871}
   - component: {fileID: 8231724855516548848}
+  - component: {fileID: 6484280817466331449}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -845,6 +846,28 @@ MonoBehaviour:
   - {fileID: 3260191024402915188}
   - {fileID: 3260191024955224636}
   - {fileID: 3260191023958206841}
+--- !u!114 &6484280817466331449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3260191024438266873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42ba025721938641ba2a7f40c9caa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cube: {fileID: 3260191024438266871}
+  _colors:
+  - {r: 0.6039216, g: 0.20392154, b: 0.20392154, a: 0}
+  - {r: 0.6039216, g: 0.3751329, b: 0.20392154, a: 0}
+  - {r: 0.6039216, g: 0.5502069, b: 0.20392154, a: 0}
+  - {r: 0.4820522, g: 0.6039216, b: 0.20392154, a: 0}
+  - {r: 0.30928993, g: 0.6039216, b: 0.20392154, a: 0}
+  - {r: 0.20392154, g: 0.6039216, b: 0.42770544, a: 0}
+  - {r: 0.20392154, g: 0.6039216, b: 0.6039216, a: 0}
+  - {r: 0.20392154, g: 0.39320493, b: 0.6039216, a: 0}
 --- !u!1 &3260191024905164672
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,9 +996,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1143,9 +1166,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1313,9 +1336,9 @@ MonoBehaviour:
   m_fontSize: 8
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
+  m_fontSizeMax: 8
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

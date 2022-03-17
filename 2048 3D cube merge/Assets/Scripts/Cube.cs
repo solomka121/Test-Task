@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private float _combineDelay;
     [SerializeField] private AnimationCurve _combineSizeCurve;
     private Rigidbody _rigidbody;
+    private MeshRenderer _meshRenderer;
     private TrailRenderer _trail;
 
     public event System.Action<int> OnValueChange;
@@ -17,6 +19,7 @@ public class Cube : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<TrailRenderer>();
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void Start()
