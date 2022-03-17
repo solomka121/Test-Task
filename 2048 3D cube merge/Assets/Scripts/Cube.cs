@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private int _value;
+    [SerializeField] private  int _defaultvalue;
+    private int _value;
     private bool _isFlying;
     private bool _canCombine = true;
     [SerializeField] private float _combineDelay;
@@ -12,7 +12,9 @@ public class Cube : MonoBehaviour
     private Rigidbody _rigidbody;
     private MeshRenderer _meshRenderer;
     private TrailRenderer _trail;
+    private CubesPool _pool;
 
+    public event System.Action<int> OnCombine;
     public event System.Action<int> OnValueChange;
 
     private void Awake()
@@ -21,6 +23,8 @@ public class Cube : MonoBehaviour
         _trail = GetComponent<TrailRenderer>();
         _meshRenderer = GetComponent<MeshRenderer>();
     }
+
+    public void SetPool(CubesPool pool) => _pool = pool;
 
     private void Start()
     {
@@ -35,7 +39,7 @@ public class Cube : MonoBehaviour
 
     public bool Combine(int cubeValue)
     {
-        if(_canCombine && _value == cubeValue)
+        if (_canCombine && _value == cubeValue)
         {
             _value += cubeValue;
             OnValueChange?.Invoke(_value);
@@ -57,28 +61,28 @@ public class Cube : MonoBehaviour
     private void CombineThrow()
     {
         _rigidbody.velocity = Vector3.zero;
-        _rigidbody.AddForce(Vector3.up * 5f , ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
 
     private IEnumerator FlyForward(float strengh)
     {
-        while(_isFlying)
+        while (_isFlying)
         {
             _rigidbody.MovePosition(_rigidbody.position + Vector3.forward * Time.deltaTime * strengh);
             yield return null;
         }
         _trail.emitting = false;
-        _rigidbody.AddForce(Vector3.forward * strengh , ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.forward * strengh, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
 
-        if(_canCombine && collision.gameObject.TryGetComponent<Cube>(out Cube cube))
+        if (_canCombine && collision.gameObject.TryGetComponent<Cube>(out Cube cube))
         {
             if (cube.Combine(_value))
             {
-                Destroy(this.gameObject);
+                Diactivate();
             }
             _isFlying = false;
         }
@@ -86,9 +90,25 @@ public class Cube : MonoBehaviour
         if (_isFlying == false)
             return;
 
-        else if(collision.gameObject.TryGetComponent<IStopCubeFly>(out _))
+        else if (collision.gameObject.TryGetComponent<IStopCubeFly>(out _))
         {
             _isFlying = false;
         }
+    }
+
+    public void Reset()
+    {
+        _value = _defaultvalue;
+        OnValueChange?.Invoke(_value);
+    }
+
+    public void Diactivate()
+    {
+        if(_pool != null)
+        {
+            _pool.ReturnCubeToPool(this);
+            return;
+        }
+        Destroy(gameObject);
     }
 }
