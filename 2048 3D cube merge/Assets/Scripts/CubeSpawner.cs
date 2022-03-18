@@ -5,7 +5,7 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private CubesPool _cubesPool;
     [SerializeField] private CubeThrower _cubeThrower;
-    [SerializeField] private float _spawnSpeed;
+    [SerializeField] private float _spawnTime;
     private Coroutine _spawnTimer;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class CubeSpawner : MonoBehaviour
 
     private IEnumerator SpawnCountdown()
     {
-        yield return new WaitForSeconds(_spawnSpeed);
+        yield return new WaitForSeconds(_spawnTime);
         SpawnCube();
         _spawnTimer = null;
     }
