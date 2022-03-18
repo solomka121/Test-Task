@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private  int _defaultvalue;
+    [SerializeField] private  int _defaultvalue = 2;
+    [SerializeField] private  int _startvalue = 2;
     private int _value;
     private bool _isFlying;
     private bool _canCombine = true;
+    [SerializeField] private LayerMask _combineWithMask;
     [SerializeField] private float _combineDelay;
-    [SerializeField] private AnimationCurve _combineSizeCurve;
+    [SerializeField] private float _combineScaleTime; 
     private Rigidbody _rigidbody;
     private TrailRenderer _trail;
     private CubesPool _pool;
@@ -20,7 +22,7 @@ public class Cube : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _trail = GetComponent<TrailRenderer>();
-        _value = _defaultvalue;
+        _value = _startvalue;
     }
 
     public void SetPool(CubesPool pool) => _pool = pool;
@@ -36,6 +38,11 @@ public class Cube : MonoBehaviour
         StartCoroutine(FlyForward(strengh));
     }
 
+    public bool CanCombine(int cubeValue)
+    {
+        return _value == cubeValue;
+    }
+
     public bool Combine(int cubeValue)
     {
         if (_isFlying)
@@ -46,7 +53,7 @@ public class Cube : MonoBehaviour
             _value += cubeValue;
             OnValueChange?.Invoke(_value);
             OnCombine?.Invoke(_value);
-            LeanTween.scale(gameObject, Vector3.zero, 0.6f).setEase(_combineSizeCurve);
+            StartCoroutine(CombineScale(_combineDelay / 2));
             StartCoroutine(CombineDelay());
             CombineThrow();
             return true;
@@ -61,10 +68,56 @@ public class Cube : MonoBehaviour
         _canCombine = true;
     }
 
+    private IEnumerator CombineScale(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        LeanTween.scale(gameObject, Vector3.one * 1.1f, _combineScaleTime).setEaseInOutCubic().setOnComplete(CombineScaleBack);
+    }
+
+    private void CombineScaleBack()
+    {
+        LeanTween.scale(gameObject, Vector3.one, _combineScaleTime).setEaseOutCubic();
+    }
+
     private void CombineThrow()
     {
         _rigidbody.velocity = Vector3.zero;
-        _rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * 8f, ForceMode.Impulse);
+        Debug.Log(ClosestSameCube());
+        _rigidbody.AddForce(ClosestSameCube(), ForceMode.Impulse);
+    }
+
+    private Vector3 ClosestSameCube()
+    {
+        Collider[] cubes = Physics.OverlapSphere(transform.position, 2f, _combineWithMask);
+        Vector3 closesCube = Vector3.one * 2f;
+        bool foundSameCube = false;
+        Debug.Log(cubes.Length);
+        if (cubes.Length > 0)
+        {
+            foreach(Collider collider in cubes)
+            {
+                if(collider.TryGetComponent<Cube>(out Cube cube))
+                {
+                    if (cube == this)
+                        continue;
+
+                    if (cube.CanCombine(_value))
+                    {
+                        Vector3 direction = cube.transform.position - transform.position;
+                        if (closesCube.magnitude > direction.magnitude)
+                        {
+                            closesCube = direction;
+                            foundSameCube = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (foundSameCube)
+            return closesCube;
+        return Vector3.zero;
+
     }
 
     private IEnumerator FlyForward(float strengh)
@@ -103,6 +156,9 @@ public class Cube : MonoBehaviour
     {
         _value = _defaultvalue;
         OnValueChange?.Invoke(_value);
+        _rigidbody.velocity = Vector3.zero;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
     public void Diactivate()
