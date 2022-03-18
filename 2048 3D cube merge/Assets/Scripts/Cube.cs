@@ -9,6 +9,7 @@ public class Cube : MonoBehaviour
     private bool _isFlying;
     private bool _canCombine = true;
     [SerializeField] private LayerMask _combineWithMask;
+    [SerializeField] private float _autoCombineRadius = 2f;
     [SerializeField] private float _combineDelay;
     [SerializeField] private float _combineScaleTime; 
     private Rigidbody _rigidbody;
@@ -89,8 +90,8 @@ public class Cube : MonoBehaviour
 
     private Vector3 ClosestSameCube()
     {
-        Collider[] cubes = Physics.OverlapSphere(transform.position, 2f, _combineWithMask);
-        Vector3 closesCube = Vector3.one * 2f;
+        Collider[] cubes = Physics.OverlapSphere(transform.position, _autoCombineRadius, _combineWithMask);
+        Vector3 closesCube = Vector3.one * _autoCombineRadius;
         bool foundSameCube = false;
         Debug.Log(cubes.Length);
         if (cubes.Length > 0)
