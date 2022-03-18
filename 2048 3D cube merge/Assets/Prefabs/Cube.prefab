@@ -680,6 +680,7 @@ MonoBehaviour:
   _combineWithMask:
     serializedVersion: 2
     m_Bits: 1024
+  _autoCombineRadius: 3.4
   _combineDelay: 0.4
   _combineScaleTime: 0.3
 --- !u!114 &8231724855516548848
