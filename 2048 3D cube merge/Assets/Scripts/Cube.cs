@@ -54,6 +54,7 @@ public class Cube : MonoBehaviour
             _value += cubeValue;
             OnValueChange?.Invoke(_value);
             OnCombine?.Invoke(_value);
+            VibrationController.Vibrate(60);
             StartCoroutine(CombineScale(_combineDelay / 2));
             StartCoroutine(CombineDelay());
             CombineThrow();
@@ -64,6 +65,8 @@ public class Cube : MonoBehaviour
 
     private IEnumerator CombineDelay()
     {
+        transform.localScale = Vector3.one * 0.8f;
+        LeanTween.scale(gameObject, Vector3.one, _combineDelay).setEaseInCubic();
         _canCombine = false;
         yield return new WaitForSeconds(_combineDelay);
         _canCombine = true;
