@@ -69,6 +69,7 @@ public class CubesPool : MonoBehaviour
     public void ReturnCubeToPool(Cube cube)
     {
         _pool.Enqueue(cube);
+        cube.Reset();
         cube.gameObject.SetActive(false);
     }
 }
