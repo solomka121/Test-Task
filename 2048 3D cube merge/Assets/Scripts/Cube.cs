@@ -161,6 +161,7 @@ public class Cube : MonoBehaviour
         _value = _defaultvalue;
         OnValueChange?.Invoke(_value);
         _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }

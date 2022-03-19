@@ -20,6 +20,7 @@ public class ThrowsCounter : MonoBehaviour
         if(_throws >= _adFrequency)
         {
             StartCoroutine(ShowAdWithDelay());
+            _throws = 0;
         }
     }
 
@@ -27,6 +28,5 @@ public class ThrowsCounter : MonoBehaviour
     {
         yield return new WaitForSeconds(_adShowDelay);
         _adModInterstitial.ShowAd();
-        _throws = 0;
     }
 }
