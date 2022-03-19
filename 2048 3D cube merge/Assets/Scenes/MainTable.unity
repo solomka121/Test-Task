@@ -801,7 +801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubesPool: {fileID: 685714357}
   _cubeThrower: {fileID: 256066044}
-  _spawnTime: 0.2
+  _spawnTime: 0.8
 --- !u!114 &685714357
 MonoBehaviour:
   m_ObjectHideFlags: 0

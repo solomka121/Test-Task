@@ -6,6 +6,7 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Button _playButton;
+    private bool _playPressed;
     [SerializeField] CoverPanel _coverPanel;
 
     void Start()
@@ -20,7 +21,11 @@ public class MainMenu : MonoBehaviour
 
     private void StartGameWithCover()
     {
-        StartCoroutine(FadeCoverAndStart());
+        if(_playPressed == false)
+        {
+            StartCoroutine(FadeCoverAndStart());
+            _playPressed = true;
+        }
     }
 
     private IEnumerator FadeCoverAndStart()
