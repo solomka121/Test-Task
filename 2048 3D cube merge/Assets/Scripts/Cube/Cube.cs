@@ -87,7 +87,6 @@ public class Cube : MonoBehaviour
     {
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * 8f, ForceMode.Impulse);
-        Debug.Log(ClosestSameCube());
         _rigidbody.AddForce(ClosestSameCube(), ForceMode.Impulse);
     }
 
@@ -96,7 +95,6 @@ public class Cube : MonoBehaviour
         Collider[] cubes = Physics.OverlapSphere(transform.position, _autoCombineRadius, _combineWithMask);
         Vector3 closesCube = Vector3.one * _autoCombineRadius;
         bool foundSameCube = false;
-        Debug.Log(cubes.Length);
         if (cubes.Length > 0)
         {
             foreach(Collider collider in cubes)

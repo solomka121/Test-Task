@@ -5,7 +5,7 @@ public class AdModInterstitial : MonoBehaviour
 {
     private InterstitialAd interstitial;
 
-    private void Start()
+    private void Awake()
     {
         this.RequestInterstitial();
     }

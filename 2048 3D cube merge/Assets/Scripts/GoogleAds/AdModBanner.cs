@@ -6,7 +6,7 @@ public class AdModBanner : MonoBehaviour
 {
     private BannerView bannerView;
 
-    public void Start()
+    public void Awake()
     {
         this.RequestBanner();
     }

@@ -9,11 +9,11 @@ public class ThrowsCounter : MonoBehaviour
     [SerializeField] private AdModInterstitial _adModInterstitial;
     private int _throws;
 
-    void Start()
+    void Awake()
     {
         _cubeThrower.OnThrow += ThrowMade;
     }
-
+     
     void ThrowMade()
     {
         _throws++;
