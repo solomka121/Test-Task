@@ -592,7 +592,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3260191024438266873}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5495902117074765545, guid: e792571b76aa2cd4ba324ae5da14e5f4, type: 3}
 --- !u!23 &3260191024438266874
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -680,8 +680,8 @@ MonoBehaviour:
   _combineWithMask:
     serializedVersion: 2
     m_Bits: 1024
-  _autoCombineRadius: 3.4
-  _combineDelay: 0.4
+  _autoCombineRadius: 4.5
+  _combineDelay: 0.2
   _combineScaleTime: 0.3
 --- !u!114 &8231724855516548848
 MonoBehaviour:
