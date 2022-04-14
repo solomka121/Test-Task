@@ -18,7 +18,7 @@ public class LocalizedTextPro : LocalizedTextComponent
         }
         catch (Exception exc)
         {
-            
+            Debug.Log("error while trying to localize text : " + localizationKey);
         }
     }
 }

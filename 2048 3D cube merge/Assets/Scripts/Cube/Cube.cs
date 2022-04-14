@@ -6,7 +6,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private  int _defaultvalue = 2;
     [SerializeField] private  int _startvalue = 2;
     private int _value;
-    private bool _isFlying;
+    public bool isFlying { get; private set; }
     private bool _canCombine = true;
     [SerializeField] private LayerMask _combineWithMask;
     [SerializeField] private float _autoCombineRadius = 2f;
@@ -34,7 +34,7 @@ public class Cube : MonoBehaviour
     }
     public void Launch(float strengh)
     {
-        _isFlying = true;
+        isFlying = true;
         _trail.emitting = true;
         StartCoroutine(FlyForward(strengh));
     }
@@ -46,7 +46,7 @@ public class Cube : MonoBehaviour
 
     public bool Combine(int cubeValue)
     {
-        if (_isFlying)
+        if (isFlying)
             return false;
 
         if (_canCombine && _value == cubeValue)
@@ -124,7 +124,7 @@ public class Cube : MonoBehaviour
 
     private IEnumerator FlyForward(float strengh)
     {
-        while (_isFlying)
+        while (isFlying)
         {
             _rigidbody.MovePosition(_rigidbody.position + Vector3.forward * Time.deltaTime * strengh);
             yield return null;
@@ -142,15 +142,15 @@ public class Cube : MonoBehaviour
             {
                 Diactivate();
             }
-            _isFlying = false;
+            isFlying = false;
         }
 
-        if (_isFlying == false)
+        if (isFlying == false)
             return;
 
         else if (collision.gameObject.TryGetComponent<IStopCubeFly>(out _))
         {
-            _isFlying = false;
+            isFlying = false;
         }
     }
 

@@ -3,6 +3,14 @@
     {
       "key": "MAIN_MENU.PLAY.BUTTON_TEXT",
       "value": "Play"
+    },
+    {
+      "key": "PLAY_MENU.YOU_LOSE.BUTTON_TEXT",
+      "value": "You Lose"
+    },
+    {
+      "key": "PLAY_MENU.RESTART.BUTTON_TEXT",
+      "value": "Restart"
     }
   ]
 }
